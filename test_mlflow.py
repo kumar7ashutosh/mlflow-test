@@ -6,15 +6,12 @@ from sklearn.datasets import load_wine
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
-
+from dagshub.auth import login
 # ========= DAGSHUB AUTHENTICATION =========
 # Requires 2 environment variables:
 #   DAGSHUB_USERNAME  → your Dagshub username
 #   CAPSTONE_TEST     → your Dagshub token
-dagshub.auth(
-    os.getenv("DAGSHUB_USERNAME"),
-    os.getenv("CAPSTONE_TEST")
-)
+login(os.getenv("DAGSHUB_USERNAME"), os.getenv("CAPSTONE_TEST"))
 
 # ========= TRACKING URI SETUP =========
 repo_owner = "kumarashutoshbtech2023"
