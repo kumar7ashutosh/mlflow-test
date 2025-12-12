@@ -1,9 +1,12 @@
-name: MLflow CI Pipeline
+name: MLflow Dagshub CI Pipeline
 
-on: push
+on:
+  push:
+    branches: [ main ]
+  pull_request:
 
 jobs:
-  mlflow-run:
+  mlflow-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,11 +28,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run MLflow training & logging
+      - name: Run MLflow training pipeline
         env:
+          DAGSHUB_USERNAME: ${{ secrets.DAGSHUB_USERNAME }}
           CAPSTONE_TEST: ${{ secrets.CAPSTONE_TEST }}
         run: |
           python test_mlflow.py
