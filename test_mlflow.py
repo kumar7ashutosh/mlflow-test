@@ -6,7 +6,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score, confusion_matrix
 
-# ========= DAGSHUB AUTH FOR CI (NO OAUTH) =========
 os.environ["MLFLOW_TRACKING_USERNAME"] = os.getenv("DAGSHUB_USERNAME")
 os.environ["MLFLOW_TRACKING_PASSWORD"] = os.getenv("CAPSTONE_TEST")
 
@@ -16,7 +15,6 @@ repo_name = "mlflow-test"
 mlflow.set_tracking_uri(f"https://dagshub.com/{repo_owner}/{repo_name}.mlflow")
 mlflow.set_experiment("remote server")
 
-# ========= DATA =========
 wine = load_wine()
 X = wine.data
 y = wine.target
@@ -31,7 +29,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 model_name = "WineRandomForestModel"
 
-# ========= TRAIN & LOG =========
 with mlflow.start_run():
     model = RandomForestClassifier(
         max_depth=max_depth,
